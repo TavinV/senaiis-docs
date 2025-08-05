@@ -67,7 +67,7 @@ const apiEndpoints = [
 
         },
         requestHeaders: {
-            
+
         },
         responses: [
             {
@@ -339,7 +339,7 @@ const apiEndpoints = [
                         "status": "Pendente",
                         "motivo": "",
                         "responsavel": "",
-                        "observacao": ""      
+                        "observacao": ""
                     },
                     "timestamp": "2023-11-15T12:00:00.000Z"
                 }
@@ -392,7 +392,7 @@ const apiEndpoints = [
                 body: {
                     "success": true,
                     "message": "",
-                    "data": {    
+                    "data": {
                         "liberacoes": [
                             {
                                 "id": "LbPq9R2s",
@@ -484,7 +484,7 @@ const apiEndpoints = [
                         "status": "Pendente",
                         "motivo": "",
                         "responsavel": "",
-                        "observacao": ""      
+                        "observacao": ""
                     },
                     "timestamp": "2023-11-15T12:00:00.000Z"
                 }
@@ -521,8 +521,61 @@ const apiEndpoints = [
             }
         ]
     },
-    
-    
+    {
+        method: 'POST',
+        path: '/api/v1/users/me/late-entries/request',
+        description: 'Solicita o registro de um atraso para o usuário logado.',
+        authRequired: true,
+        requestBody: {},
+        requestHeaders: {
+            "Authorization": "Bearer <Token JWT>"
+        },
+        responses: [
+            {
+                code: 201,
+                description: 'Atraso registrado com sucesso',
+                body: {
+                    "success": true,
+                    "message": "Atraso registrado com sucesso. Compareça à secretaria para mais informações.",
+                    "data": {
+                        "codigo_atraso": "MFUSI9YX"
+                    },
+                    "timestamp": "2025-08-05T01:30:41.651Z"
+                },
+            },
+
+            {
+                code: 409,
+                description: 'Atraso já registrado',
+                body: {
+                    "success": false,
+                    "message": "Você já tem um atraso pendente. Regularize-o antes de solicitar outro.",
+                    "data": {},
+                    "timestamp": "2023-11-15T12:00:00.000Z"
+                }
+            },
+            {
+                code: 403,
+                description: "Token inválido / Expirado",
+                body: {
+                    "success": false,
+                    "message": "Token inválido",
+                    "data": {},
+                    "timestamp": "2023-11-15T12:00:00.000Z"
+                }
+            },
+            {
+                code: 500,
+                description: "Erro interno do servidor",
+                body: {
+                    "success": false,
+                    "message": "Erro interno do servidor",
+                    "data": {},
+                    "timestamp": "2023-11-15T12:00:00.000Z"
+                }
+            }
+        ]
+    }
 ];
 
 export default apiEndpoints
